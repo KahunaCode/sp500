@@ -13,5 +13,8 @@ import pandas_datareader.data as web
 ##print(df.tail())
 ##df.to_csv('tnp.csv')
 
-df = pd.read_csv('tnp.csv')
-print(df.tail())
+df = pd.read_csv('tnp.csv', parse_dates=True, index_col=0)
+print(df['Adj Close'].tail())
+df['Adj Close'].plot()
+
+plt.show()
