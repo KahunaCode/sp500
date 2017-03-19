@@ -1,6 +1,8 @@
 import datetime as dt
 import matplotlib.pyplot as plt
 from matplotlib import style
+from matplotlib.finance import candlestick_ohlc
+import matplotlib.dates as mdates
 import pandas as pd
 import pandas_datareader.data as web
 
@@ -33,3 +35,4 @@ ax1.plot(df.index, df['100_moving_avg'])
 ax2.bar(df.index, df['Volume'])
 
 plt.show()
+
