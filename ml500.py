@@ -47,7 +47,7 @@ def extract_featuresets(ticker):
     X = df_vals.values
     y = df['{}_target'.format(ticker)].values
 
-    print(X)
+    #print(X)
     return X,y,df
 
 def mlearn(ticker):
@@ -56,6 +56,9 @@ def mlearn(ticker):
     X_train, X_test, y_train, y_test = cross_validation.train_test_split(X,y,test_size=0.25)
 
     clf = neighbors.KNeighborsClassifier()
+    clf = VotingClassifier([('lsvc', svm.LinearSVC()),
+                            ('knn', neighbors.KNeighborsClassifier()),
+                            ('rfor', RandomForestClassifier())])
 
     clf.fit(X_train, y_train)
     confidence = clf.score(X_test, y_test)
