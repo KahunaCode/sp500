@@ -56,6 +56,7 @@ def mlearn(ticker):
     X_train, X_test, y_train, y_test = cross_validation.train_test_split(X,y,test_size=0.25)
 
     clf = neighbors.KNeighborsClassifier()
+    #sklearn has flags for linearSVC, KNN, random forest
     clf = VotingClassifier([('lsvc', svm.LinearSVC()),
                             ('knn', neighbors.KNeighborsClassifier()),
                             ('rfor', RandomForestClassifier())])
@@ -68,7 +69,7 @@ def mlearn(ticker):
 
     return confidence
 
-mlearn('XOM')
+mlearn('MMM')
 
 
 
