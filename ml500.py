@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import pickle
+from collections import Counter
 
 def process_labels(ticker):
     hm_days =7
@@ -24,3 +25,17 @@ def bsh(*args):
             return -1
     return 0
 
+def extract_featuresets(ticker):
+    tickers, df = process_labels(ticker)
+
+    df['{}_target'.format(ticker)] = list(map(bsh,
+                                              *[df['{}_{}d'.format(ticker, i)]for i in range(1,8)]))
+    vals = df['{}_target'.format(ticker)]
+    str_vals = [str(i) for i in vals]
+    print('Data spread-', Counter(str_vals))
+    
+    df.fillna(0, inplace=True)
+    df = df.replace([np.inf, -np.inf], np.nan)
+    df.dropna(inplace=True)
+
+    
