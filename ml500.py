@@ -2,6 +2,8 @@ import numpy as np
 import pandas as pd
 import pickle
 from collections import Counter
+from sklearn import svm, cross_validation, neighbors
+from sklearn.ensemble import VotingClassifier, RandomForestClassifier
 
 def process_labels(ticker):
     hm_days =7
@@ -48,5 +50,22 @@ def extract_featuresets(ticker):
     print(X)
     return X,y,df
 
-    
-extract_featuresets('XOM')
+def mlearn(ticker):
+    #X is percent change, y is target classification: 1,-1,0
+    X, y, df = extract_featuresets(ticker)
+    X_train, X_test, y_train, y_test = cross_validation.train_test_split(X,y,test_size=0.25)
+
+    clf = neighbors.KNeighborsClassifier()
+
+    clf.fit(X_train, y_train)
+    confidence = clf.score(X_test, y_test)
+    print('Accuracy', confidence)
+    predictions = clf.predict(X_test)
+    print('Predicted spread:', Counter(predictions))
+
+    return confidence
+
+mlearn('XOM')
+
+
+
