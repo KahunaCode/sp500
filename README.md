@@ -1,6 +1,6 @@
 # s&p500 graphing and machine learning 
 
-pricedata.py uses the Pandas / pandas_data reader to query the yahoo api for stock ticker data for a date range. It then computes a moving average and plots all the data with matplotlib.
+pricedata.py uses the Pandas / pandas_data reader to query the yahoo api for S&P500 stock ticker data for a date range. It then computes a moving average and plots all the data with matplotlib.
 
 ohlc.py is Open High Low Close. This takes the data from pricedata.py and computes a candlestick plot, again using pandas and matplotlib, to represent the dataframe.
 
